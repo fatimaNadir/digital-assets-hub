@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendSphere | AI Search Optimization & Digital Hub</title>
+    <title>TrendSphere | 3D Interactive Light Hub</title>
     <style>
         :root {
-            --bg-primary: #070913;
-            --bg-surface: #10172a;
-            --bg-card: rgba(17, 24, 39, 0.7);
-            --accent-glow: #6366f1;
-            --neon-cyan: #38bdf8;
-            --neon-purple: #c084fc;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.08);
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --accent: #6366f1;
+            --neon-cyan: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-glow: rgba(99, 102, 241, 0.2);
+            --shadow-card: 0 20px 40px rgba(15, 23, 42, 0.08);
         }
 
         * {
@@ -25,7 +24,7 @@
         }
 
         body {
-            background-color: var(--bg-primary);
+            background-color: var(--bg-light);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -33,33 +32,21 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Background Glow */
-        .ambient-glow {
-            position: fixed;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 80%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
+        /* Header Navigation */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(7, 9, 19, 0.85);
+            background: rgba(248, 250, 252, 0.85);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-glass);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .nav-container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 2rem;
-            height: 85px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -68,43 +55,41 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
             cursor: pointer;
         }
 
         .logo-badge {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent-glow), var(--neon-cyan));
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon-cyan));
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #fff;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
         }
 
         .logo-text h2 {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 800;
-            background: linear-gradient(to right, #fff, var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
         }
 
         .logo-text span {
-            font-size: 0.75rem;
-            color: var(--accent-glow);
+            font-size: 0.72rem;
+            color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             font-weight: 700;
         }
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         nav button {
@@ -114,36 +99,34 @@
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: color 0.2s;
         }
 
         nav button:hover, nav button.active {
-            color: var(--neon-cyan);
+            color: var(--accent);
         }
 
         .cta-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent-glow), #4f46e5);
+            background: linear-gradient(135deg, var(--accent), #4f46e5);
             color: white;
             font-weight: 700;
             font-size: 0.9rem;
             border: none;
             cursor: pointer;
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+            transition: transform 0.2s;
         }
 
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
         }
 
         main {
             flex: 1;
             position: relative;
-            z-index: 1;
         }
 
         .page-section {
@@ -154,307 +137,317 @@
             display: block;
         }
 
-        /* Hero Bento Layout */
-        .hero {
-            min-height: 85vh;
+        /* Hero 3D Rectangular Stage with Clear Spacing */
+        .hero-stage {
+            position: relative;
+            min-height: 88vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            max-width: 1300px;
-            margin: 0 auto;
+            justify-content: flex-start;
+            overflow: hidden;
+            padding: 4rem 1rem 2rem 1rem;
         }
 
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .bento-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 2.5rem;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-
-        .bento-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .hero-main {
-            grid-column: span 8;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-side {
-            grid-column: span 4;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: linear-gradient(145deg, rgba(16, 23, 42, 0.9), rgba(99, 102, 241, 0.1));
-        }
-
-        @media(max-width: 992px) {
-            .hero-main, .hero-side { grid-column: span 12; }
+        .hero-header {
+            text-align: center;
+            z-index: 10;
+            margin-bottom: 3.5rem; /* Extra space added so text and carousel don't overlap */
+            max-width: 800px;
         }
 
         .badge-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.5rem 1.25rem;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
             border-radius: 99px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
             font-size: 0.8rem;
             font-weight: 700;
-            color: var(--neon-cyan);
-            margin-bottom: 1.5rem;
-            width: fit-content;
+            color: var(--accent);
+            margin-bottom: 1rem;
         }
 
-        .hero-main h1 {
-            font-size: 3.5rem;
+        .hero-header h1 {
+            font-size: 2.8rem;
             font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
         }
 
-        .hero-main h1 span {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--accent-glow), var(--neon-purple));
+        .hero-header h1 span {
+            background: linear-gradient(135deg, var(--accent), var(--neon-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-main p {
-            font-size: 1.1rem;
+        .hero-header p {
             color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-            max-width: 650px;
+            font-size: 1.05rem;
         }
 
-        .hero-actions {
+        /* 3D Rectangular Carousel Viewport */
+        .viewport-3d {
+            width: 100%;
+            max-width: 1100px;
+            height: 380px;
+            perspective: 1200px;
+            position: relative;
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
         }
 
-        .secondary-btn {
-            padding: 0.75rem 1.75rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-glass);
-            color: var(--text-main);
-            font-weight: 700;
+        .carousel-rect-track {
+            width: 320px;
+            height: 350px;
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        .rect-card {
+            position: absolute;
+            width: 300px;
+            height: 340px;
+            left: 10px;
+            top: 5px;
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 20px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+            transition: border-color 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            transition: background 0.2s;
+            user-select: none;
         }
 
-        .secondary-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .rect-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 20px 35px rgba(99, 102, 241, 0.15);
         }
 
-        /* Container & Sections */
+        .rect-card-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 99px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: fit-content;
+        }
+
+        .rect-card-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rect-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .rect-card-price {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        .rect-card-btn {
+            display: block;
+            width: 100%;
+            padding: 0.65rem;
+            border-radius: 10px;
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            z-index: 10;
+        }
+
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .control-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Container Sections */
         .container {
-            max-width: 1300px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 5rem 2rem;
+            padding: 4rem 1.5rem;
         }
 
         .section-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 4rem auto;
+            margin: 0 auto 3.5rem auto;
         }
 
         .section-header span {
             font-size: 0.85rem;
             font-weight: 800;
-            color: var(--accent-glow);
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .section-header h2 {
-            font-size: 2.75rem;
+            font-size: 2.4rem;
             font-weight: 800;
             margin-top: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
         }
 
         .section-header p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
-        /* Standard Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .product-card, .blog-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 2.5rem;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 20px;
+            padding: 2.25rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .product-card:hover, .blog-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
         }
 
-        .card-top {
+        /* Modal Lightbox Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 200;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            justify-content: center;
+            padding: 1.5rem;
         }
 
-        .tag {
-            padding: 0.4rem 1rem;
-            border-radius: 99px;
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--neon-cyan);
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .price {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .card-title {
-            font-size: 1.35rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-            color: #fff;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .card-btn {
-            display: block;
-            width: 100%;
-            padding: 0.85rem;
-            border-radius: 12px;
-            background: var(--accent-glow);
-            color: white;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-align: center;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .card-btn:hover {
-            background: #4f46e5;
-        }
-
-        /* Interactive Studio / Canvas */
-        .studio-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        @media(max-width: 900px) {
-            .studio-grid { grid-template-columns: 1fr; }
-        }
-
-        .control-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .control-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text-main);
-        }
-
-        .control-group input[type="range"] {
-            width: 100%;
-            accent-color: var(--accent-glow);
-        }
-
-        .canvas-box {
-            position: relative;
-            height: 500px;
-            background: rgba(16, 23, 42, 0.95);
-            border: 1px solid var(--border-glass);
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.2);
             border-radius: 24px;
-            overflow: hidden;
+            max-width: 550px;
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        /* Forms & About */
+        .close-modal {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-modal:hover { color: var(--text-main); }
+
         .about-box, .form-box {
             background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 28px;
-            padding: 3.5rem;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-card);
         }
 
         .form-group {
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-main);
         }
 
         .form-control {
             width: 100%;
-            padding: 1rem 1.25rem;
-            border-radius: 14px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-glass);
-            color: white;
-            font-size: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            background: #f1f5f9;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            color: var(--text-main);
+            font-size: 0.95rem;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--neon-cyan);
+            border-color: var(--accent);
         }
 
         footer {
-            background: var(--bg-primary);
-            border-top: 1px solid var(--border-glass);
-            padding: 3.5rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
+            padding: 3rem 2rem;
             text-align: center;
         }
 
         .footer-content {
-            max-width: 1300px;
+            max-width: 1280px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -469,27 +462,24 @@
 
         .footer-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--neon-cyan);
+            color: var(--accent);
         }
 
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
-
-    <div class="ambient-glow"></div>
 
     <!-- Header -->
     <header>
@@ -502,64 +492,43 @@
                 </div>
             </div>
             <nav id="desktop-nav">
-                <button onclick="switchPage('home')" id="nav-home" class="active">Home</button>
+                <button onclick="switchPage('home')" id="nav-home" class="active">3D Light Hub</button>
                 <button onclick="switchPage('products')" id="nav-products">Gumroad Store</button>
                 <button onclick="switchPage('blog')" id="nav-blog">Tech Blog</button>
-                <button onclick="switchPage('playground')" id="nav-playground">Thread Studio</button>
                 <button onclick="switchPage('about')" id="nav-about">About</button>
                 <button onclick="switchPage('contact')" id="nav-contact">Contact</button>
             </nav>
-            <a href="https://fatimanadir.gumroad.com" target="_blank" class="cta-btn">Gumroad Store</a>
+            <a href="https://fatimanadir.gumroad.com" target="_blank" class="cta-btn">Visit Gumroad</a>
         </div>
     </header>
 
     <!-- Main Dynamic Pages -->
     <main>
 
-        <!-- PAGE 1: HOME (BENTO HERO) -->
+        <!-- PAGE 1: HOME (3D RECTANGULAR CAROUSEL - AUTO ROTATING) -->
         <section id="page-home" class="page-section active">
-            <div class="hero">
-                <div class="bento-grid">
-                    <div class="bento-card hero-main">
-                        <div class="badge-pill">
-                            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--neon-cyan);"></span>
-                            AI Search Optimization & Micro-SaaS Studio
-                        </div>
-                        <h1>Engineering the Future of <span>AI Search & Web Utilities</span></h1>
-                        <p>Welcome to TrendSphere. Explore high-performance client-side micro-utilities, Generative Engine Optimization (GEO) matrices, and professional digital product packages built for global creators.</p>
-                        <div class="hero-actions">
-                            <button onclick="switchPage('products')" class="cta-btn">Explore Gumroad Products</button>
-                            <button onclick="switchPage('blog')" class="secondary-btn">Read TrendSphere Articles</button>
-                        </div>
+            <div class="hero-stage">
+                <div class="hero-header">
+                    <div class="badge-pill">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent);"></span>
+                        Interactive 3D Light Showcase
                     </div>
-                    <div class="bento-card hero-side">
-                        <div>
-                            <span style="font-size: 0.8rem; font-weight: 800; color: var(--accent-glow); text-transform: uppercase; letter-spacing: 1.5px;">Creator Ecosystem</span>
-                            <h3 style="font-size: 1.5rem; font-weight: 800; margin-top: 0.5rem; color: #fff;">Karachi to Global Markets</h3>
-                        </div>
-                        <div style="space-y: 1rem;">
-                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
-                                <span style="color: var(--text-muted); font-size: 0.9rem;">Active Products</span>
-                                <span style="font-weight: 800; color: var(--neon-cyan);">6+ Toolkits</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <span style="color: var(--text-muted); font-size: 0.9rem;">Optimization</span>
-                                <span style="font-weight: 800; color: var(--accent-glow);">GEO & Schema</span>
-                            </div>
-                        </div>
-                        <button onclick="switchPage('playground')" class="secondary-btn" style="width: 100%; text-align: center;">Launch Interactive Studio &rarr;</button>
-                    </div>
+                    <h1>Explore TrendSphere <span>Products & Tech Hub</span></h1>
+                    <p>Yeh 3D rectangular carousel automatically rotate ho raha hai. Kisi bhi item par click karke details inspect karein.</p>
                 </div>
-            </div>
 
-            <!-- Featured Products -->
-            <div class="container" style="padding-top: 0;">
-                <div class="section-header">
-                    <span>Monetization Hub</span>
-                    <h2>Featured Gumroad Products</h2>
-                    <p>Professional software templates and toolkits crafted by Fatima Nadir.</p>
+                <!-- 3D Rectangular Track Viewport -->
+                <div class="viewport-3d" id="viewport3D">
+                    <div class="carousel-rect-track" id="rectTrack">
+                        <!-- Cards injected via JS -->
+                    </div>
                 </div>
-                <div class="cards-grid" id="home-products-grid"></div>
+
+                <!-- Controls -->
+                <div class="carousel-controls">
+                    <button class="control-btn" onclick="rotateManual(-1)">&larr;</button>
+                    <button class="control-btn" onclick="rotateManual(1)">&rarr;</button>
+                </div>
             </div>
         </section>
 
@@ -568,8 +537,8 @@
             <div class="container">
                 <div class="section-header">
                     <span>Digital Storefront</span>
-                    <h2>Gumroad Toolkits & Assets</h2>
-                    <p>Ready-to-use templates, AI SEO matrix packages, and enterprise ERP micro-utilities.</p>
+                    <h2>Gumroad Toolkits & Products</h2>
+                    <p>Ready-to-use software templates, AI SEO matrix packages, and ERP utilities.</p>
                 </div>
                 <div class="cards-grid" id="all-products-grid"></div>
             </div>
@@ -580,73 +549,41 @@
             <div class="container">
                 <div class="section-header">
                     <span>TrendSphere Publication</span>
-                    <h2>Insights on AI Search, GEO & Web Dev</h2>
-                    <p>Articles optimized for ChatGPT, Perplexity, and modern developer workflows.</p>
+                    <h2>Articles on GEO & AI Search</h2>
+                    <p>Deep dive guides for ChatGPT, Perplexity, and modern client-side utilities.</p>
                 </div>
                 <div class="cards-grid" id="blog-articles-grid"></div>
             </div>
         </section>
 
-        <!-- PAGE 4: THREAD STUDIO -->
-        <section id="page-playground" class="page-section">
-            <div class="container">
-                <div class="section-header">
-                    <span>Interactive Studio</span>
-                    <h2>Live Thread & Wave Playground</h2>
-                    <p>Customize mathematical wave parameters and test canvas performance in real time.</p>
-                </div>
-                <div class="studio-grid">
-                    <div class="bento-card">
-                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.75rem;">Wave Controls</h3>
-                        <div class="control-group">
-                            <label>Line Density: <span id="val-lines" style="color: var(--neon-cyan)">12</span></label>
-                            <input type="range" id="range-lines" min="4" max="30" value="12" oninput="updatePlayground()">
-                        </div>
-                        <div class="control-group">
-                            <label>Wave Speed: <span id="val-speed" style="color: var(--neon-cyan)">0.05</span></label>
-                            <input type="range" id="range-speed" min="0.01" max="0.15" step="0.01" value="0.05" oninput="updatePlayground()">
-                        </div>
-                        <div class="control-group">
-                            <label>Amplitude: <span id="val-amp" style="color: var(--neon-cyan)">60</span></label>
-                            <input type="range" id="range-amp" min="20" max="150" value="60" oninput="updatePlayground()">
-                        </div>
-                        <button onclick="resetPlayground()" class="card-btn" style="margin-top: 1rem;">Reset Default</button>
-                    </div>
-                    <div class="canvas-box">
-                        <canvas id="playgroundCanvas" style="position: absolute; width: 100%; height: 100%;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 5: ABOUT -->
+        <!-- PAGE 4: ABOUT -->
         <section id="page-about" class="page-section">
-            <div class="container" style="max-width: 950px;">
+            <div class="container" style="max-width: 900px;">
                 <div class="about-box">
-                    <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 2rem; flex-wrap: wrap;">
-                        <div style="width: 85px; height: 85px; border-radius: 20px; background: linear-gradient(135deg, var(--accent-glow), var(--neon-cyan)); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: white;">FN</div>
+                    <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(15,23,42,0.1); padding-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, var(--accent), var(--neon-cyan)); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: white;">FN</div>
                         <div>
-                            <h2 style="font-size: 2.2rem; font-weight: 800;">Fatima Nadir</h2>
-                            <p style="color: var(--accent-glow); font-weight: 700; margin-top: 0.25rem;">Web Developer, SEO Content Writer & Digital Publisher</p>
+                            <h2 style="font-size: 2rem; font-weight: 800;">Fatima Nadir</h2>
+                            <p style="color: var(--accent); font-weight: 700; margin-top: 0.25rem;">Web Developer, SEO Content Writer & Digital Publisher</p>
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Based in Karachi, Pakistan | Creator of TrendSphere</p>
                         </div>
                     </div>
-                    <div style="color: var(--text-muted); line-height: 1.8; display: flex; flex-direction: column; gap: 1.2rem;">
-                        <h3 style="color: #fff; font-size: 1.35rem; font-weight: 800;">About TrendSphere & Vision</h3>
+                    <div style="color: var(--text-muted); line-height: 1.8; display: flex; flex-direction: column; gap: 1rem;">
+                        <h3 style="color: var(--text-main); font-size: 1.25rem; font-weight: 800;">About TrendSphere Mission</h3>
                         <p>TrendSphere is an independent digital blog and micro-SaaS studio focused on building high-performance client-side web utilities, developer toolkits, and Generative Engine Optimization (GEO) guides.</p>
-                        <p>Specializing in vanilla JavaScript, Tailwind CSS, and lightweight client architecture without heavy backend overhead, our mission is to provide clean, accessible digital assets for solopreneurs and creators worldwide.</p>
+                        <p>Specializing in vanilla JavaScript, Tailwind CSS, and lightweight client architecture without heavy backend overhead, our mission is to provide clean, accessible digital assets for solopreneurs worldwide.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PAGE 6: CONTACT -->
+        <!-- PAGE 5: CONTACT -->
         <section id="page-contact" class="page-section">
-            <div class="container" style="max-width: 850px;">
+            <div class="container" style="max-width: 800px;">
                 <div class="form-box">
                     <div class="section-header" style="margin-bottom: 2.5rem;">
                         <span>Get In Touch</span>
-                        <h2 style="font-size: 2.2rem;">Contact Studio</h2>
+                        <h2 style="font-size: 2rem;">Contact Studio</h2>
                         <p>Have questions about our Gumroad products or blog collaborations? Send a message.</p>
                     </div>
                     <form onsubmit="handleContactSubmit(event)">
@@ -673,9 +610,9 @@
                             <label>Message</label>
                             <textarea rows="5" required class="form-control" placeholder="Write your message here..."></textarea>
                         </div>
-                        <button type="submit" class="cta-btn" style="width: 100%; padding: 1.1rem; font-size: 1rem;">Send Message</button>
-                        <div id="contact-success" class="hidden" style="text-align: center; color: #34d399; font-weight: 700; margin-top: 1.5rem;">
-                            Thank you! Your message has been successfully simulated and sent to TrendSphere support.
+                        <button type="submit" class="cta-btn" style="width: 100%; padding: 1rem;">Send Message</button>
+                        <div id="contact-success" class="hidden" style="text-align: center; color: #16a34a; font-weight: 700; margin-top: 1.5rem;">
+                            Thank you! Your message has been sent to TrendSphere support.
                         </div>
                     </form>
                 </div>
@@ -684,11 +621,25 @@
 
     </main>
 
+    <!-- Modal Popup Lightbox for 3D Cards -->
+    <div id="modalLightbox" class="modal-overlay hidden">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <span id="modalTag" class="rect-card-tag" style="margin-bottom: 1rem;">Tag</span>
+            <h2 id="modalTitle" style="font-size: 1.75rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem;">Title</h2>
+            <p id="modalDesc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">Description goes here...</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="modalPrice" style="font-size: 1.75rem; font-weight: 800; color: var(--accent);">$19</span>
+                <a id="modalLink" href="https://fatimanadir.gumroad.com" target="_blank" class="cta-btn">View on Gumroad &rarr;</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div>
-                <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff;">TrendSphere & Gumroad Hub</h3>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">TrendSphere & Gumroad Hub</h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">© 2026 TrendSphere by Fatima Nadir. All rights reserved.</p>
             </div>
             <div class="footer-links">
@@ -702,12 +653,12 @@
     <!-- Script Engine -->
     <script>
         const products = [
-            { title: "AI & SEO Master Suite V2", price: "$19", desc: "Complete toolkit for Generative Engine Optimization, Schema markup generators, and AI prompt bundles.", tag: "Best Seller", link: "https://fatimanadir.gumroad.com" },
-            { title: "Toolify Enterprise ERP Utility", price: "$29", desc: "Lightweight client-side business inventory, footwear POS, and staff attendance tracking system.", tag: "SaaS Kit", link: "https://fatimanadir.gumroad.com" },
-            { title: "Pro AI Text Humanizer Suite", price: "$15", desc: "Advanced string manipulation utility and prompt tuning templates for high-ranking AI content.", tag: "New", link: "https://fatimanadir.gumroad.com" },
-            { title: "SiteCraft Pro Multi-Page Generator", price: "$24", desc: "Vanilla JS & Tailwind CSS multi-page boilerplate with instant deployment scripts.", tag: "Template", link: "https://fatimanadir.gumroad.com" },
-            { title: "Glassmorphism & CSS Tool Pack", price: "$9", desc: "Instant CSS gradient and glass generator widgets ready for Blogger & GitHub hosting.", tag: "Utility", link: "https://fatimanadir.gumroad.com" },
-            { title: "TrendSphere Content Blueprint", price: "$12", desc: "Step-by-step framework for dominating USA/UK search intent and AI search citations.", tag: "Guide", link: "https://fatimanadir.gumroad.com" }
+            { id: 1, title: "AI & SEO Master Suite V2", price: "$19", desc: "Complete toolkit for Generative Engine Optimization, Schema markup generators, and AI prompt bundles.", tag: "Best Seller", link: "https://fatimanadir.gumroad.com" },
+            { id: 2, title: "Toolify Enterprise ERP Utility", price: "$29", desc: "Lightweight client-side business inventory, footwear POS, and staff attendance tracking system.", tag: "SaaS Kit", link: "https://fatimanadir.gumroad.com" },
+            { id: 3, title: "Pro AI Text Humanizer Suite", price: "$15", desc: "Advanced string manipulation utility and prompt tuning templates for high-ranking AI content.", tag: "New", link: "https://fatimanadir.gumroad.com" },
+            { id: 4, title: "SiteCraft Pro Multi-Page Generator", price: "$24", desc: "Vanilla JS & Tailwind CSS multi-page boilerplate with instant deployment scripts.", tag: "Template", link: "https://fatimanadir.gumroad.com" },
+            { id: 5, title: "Glassmorphism & CSS Tool Pack", price: "$9", desc: "Instant CSS gradient and glass generator widgets ready for Blogger & GitHub hosting.", tag: "Utility", link: "https://fatimanadir.gumroad.com" },
+            { id: 6, title: "TrendSphere Content Blueprint", price: "$12", desc: "Step-by-step framework for dominating USA/UK search intent and AI search citations.", link: "https://fatimanadir.gumroad.com" }
         ];
 
         const articles = [
@@ -717,34 +668,97 @@
             { title: "Automating Business Workflows with Zero-Server ERP Tools", date: "August 2026", cat: "Business Utility", snippet: "How small agencies and retail stores can manage inventory and attendance using lightweight browser-based solutions.", link: "https://trendsphere123.blogspot.com" }
         ];
 
-        function renderContent() {
-            const homeGrid = document.getElementById('home-products-grid');
-            homeGrid.innerHTML = products.slice(0, 3).map(p => `
-                <div class="product-card">
-                    <div>
-                        <div class="card-top">
-                            <span class="tag">${p.tag}</span>
-                            <span class="price">${p.price}</span>
-                        </div>
-                        <h3 class="card-title">${p.title}</h3>
-                        <p class="card-desc">${p.desc}</p>
-                    </div>
-                    <a href="${p.link}" target="_blank" class="card-btn">Get on Gumroad</a>
-                </div>
-            `).join('');
+        let currentAngle = 0;
+        const totalCards = products.length;
+        const radius = 420;
+        let isAutoRotating = true;
 
+        function init3DRectCarousel() {
+            const track = document.getElementById('rectTrack');
+            track.innerHTML = '';
+
+            products.forEach((p, index) => {
+                const angle = (index / totalCards) * 360;
+                const card = document.createElement('div');
+                card.className = 'rect-card';
+                card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+                card.innerHTML = `
+                    <div>
+                        <span class="rect-card-tag">${p.tag}</span>
+                        <h3 class="rect-card-title">${p.title}</h3>
+                        <p class="rect-card-desc">${p.desc}</p>
+                    </div>
+                    <div>
+                        <div class="rect-card-price">${p.price}</div>
+                        <button class="rect-card-btn" onclick="openModal(${p.id}); event.stopPropagation();">Inspect Details &rarr;</button>
+                    </div>
+                `;
+                card.onclick = () => openModal(p.id);
+                track.appendChild(card);
+            });
+
+            updateCarouselRotation();
+        }
+
+        function updateCarouselRotation() {
+            const track = document.getElementById('rectTrack');
+            track.style.transform = `rotateY(${currentAngle}deg)`;
+        }
+
+        // Auto-rotation animation loop
+        function autoRotateLoop() {
+            if (isAutoRotating) {
+                currentAngle += 0.3; // Automatic slow rotation speed
+                updateCarouselRotation();
+            }
+            requestAnimationFrame(autoRotateLoop);
+        }
+
+        function rotateManual(direction) {
+            isAutoRotating = false;
+            currentAngle += direction * (360 / totalCards);
+            updateCarouselRotation();
+            setTimeout(() => { isAutoRotating = true; }, 4000); // Resume auto-rotate after 4s
+        }
+
+        let isDragging = false;
+        let startX = 0;
+
+        const viewport = document.getElementById('viewport3D');
+        viewport.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            isAutoRotating = false;
+            startX = e.clientX;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const deltaX = e.clientX - startX;
+            currentAngle += deltaX * 0.15;
+            startX = e.clientX;
+            updateCarouselRotation();
+        });
+
+        window.addEventListener('mouseup', () => { 
+            if(isDragging) {
+                isDragging = false;
+                setTimeout(() => { isAutoRotating = true; }, 3000);
+            }
+        });
+
+        function renderContent() {
             const allGrid = document.getElementById('all-products-grid');
             allGrid.innerHTML = products.map(p => `
                 <div class="product-card">
                     <div>
-                        <div class="card-top">
-                            <span class="tag">${p.tag}</span>
-                            <span class="price">${p.price}</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                            <span class="rect-card-tag">${p.tag}</span>
+                            <span style="font-size:1.5rem; font-weight:800; color:var(--text-main);">${p.price}</span>
                         </div>
-                        <h3 class="card-title">${p.title}</h3>
-                        <p class="card-desc">${p.desc}</p>
+                        <h3 style="font-size:1.3rem; font-weight:800; color:var(--text-main); margin-bottom:0.75rem;">${p.title}</h3>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5; margin-bottom:1.5rem;">${p.desc}</p>
                     </div>
-                    <a href="${p.link}" target="_blank" class="card-btn">Buy Now on Gumroad</a>
+                    <a href="${p.link}" target="_blank" class="cta-btn" style="text-align:center;">Buy Now on Gumroad</a>
                 </div>
             `).join('');
 
@@ -752,16 +766,33 @@
             blogGrid.innerHTML = articles.map(a => `
                 <div class="blog-card">
                     <div>
-                        <div class="card-top">
-                            <span class="tag" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan);">${a.cat}</span>
-                            <span style="font-size: 0.8rem; color: var(--text-muted);">${a.date}</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                            <span class="rect-card-tag" style="background:rgba(99,102,241,0.1); color:var(--accent);">${a.cat}</span>
+                            <span style="font-size:0.8rem; color:var(--text-muted);">${a.date}</span>
                         </div>
-                        <h3 class="card-title">${a.title}</h3>
-                        <p class="card-desc">${a.snippet}</p>
+                        <h3 style="font-size:1.3rem; font-weight:800; color:var(--text-main); margin-bottom:0.75rem;">${a.title}</h3>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5; margin-bottom:1.5rem;">${a.snippet}</p>
                     </div>
-                    <a href="${a.link}" target="_blank" style="color: var(--neon-cyan); font-weight: 700; font-size: 0.95rem; text-decoration: none;">Read on Blog &rarr;</a>
+                    <a href="${a.link}" target="_blank" style="color:var(--accent); font-weight:700; text-decoration:none;">Read on Blog &rarr;</a>
                 </div>
             `).join('');
+        }
+
+        function openModal(productId) {
+            isAutoRotating = false;
+            const item = products.find(p => p.id === productId);
+            if (!item) return;
+            document.getElementById('modalTag').innerText = item.tag;
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalDesc').innerText = item.desc;
+            document.getElementById('modalPrice').innerText = item.price;
+            document.getElementById('modalLink').href = item.link;
+            document.getElementById('modalLightbox').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modalLightbox').classList.add('hidden');
+            isAutoRotating = true;
         }
 
         function switchPage(pageId) {
@@ -775,60 +806,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function initCanvas(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-
-            function resize() {
-                canvas.width = canvas.parentElement.clientWidth;
-                canvas.height = canvas.parentElement.clientHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            let step = 0;
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                let linesCount = parseInt(document.getElementById('range-lines').value);
-                let speedVal = parseFloat(document.getElementById('range-speed').value);
-                let ampVal = parseInt(document.getElementById('range-amp').value);
-
-                step += speedVal;
-
-                for (let i = 0; i < linesCount; i++) {
-                    ctx.beginPath();
-                    ctx.lineWidth = 2;
-                    let alpha = (i + 1) / linesCount * 0.6;
-                    ctx.strokeStyle = i % 2 === 0 ? `rgba(99, 102, 241, ${alpha})` : `rgba(56, 189, 248, ${alpha})`;
-                    
-                    let yOffset = (canvas.height / (linesCount + 1)) * (i + 1);
-                    for (let x = 0; x < canvas.width; x += 15) {
-                        let y = yOffset + Math.sin(x * 0.003 + step + i * 0.3) * ampVal * Math.cos(step * 0.5);
-                        if (x === 0) ctx.moveTo(x, y);
-                        else ctx.lineTo(x, y);
-                    }
-                    ctx.stroke();
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-        }
-
-        function updatePlayground() {
-            document.getElementById('val-lines').innerText = document.getElementById('range-lines').value;
-            document.getElementById('val-speed').innerText = document.getElementById('range-speed').value;
-            document.getElementById('val-amp').innerText = document.getElementById('range-amp').value;
-        }
-
-        function resetPlayground() {
-            document.getElementById('range-lines').value = 12;
-            document.getElementById('range-speed').value = 0.05;
-            document.getElementById('range-amp').value = 60;
-            updatePlayground();
-        }
-
         function handleContactSubmit(e) {
             e.preventDefault();
             document.getElementById('contact-success').classList.remove('hidden');
@@ -839,8 +816,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            init3DRectCarousel();
             renderContent();
-            initCanvas('playgroundCanvas');
+            requestAnimationFrame(autoRotateLoop);
         });
     </script>
 </body>
